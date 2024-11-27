@@ -60,7 +60,7 @@ docker compose up --build
 - **Query Parameters**: 
   - `expenseId` (string) – The unique ID of the expense.
 - **Response**: 
-  - Returns the details of the specified expense.
+  - Returns a list of single expense the specified id.
 
 #### `GET /expense?category={category}`
 - **Description**: Retrieve expenses filtered by the specified category.
