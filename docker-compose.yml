@@ -1,0 +1,46 @@
+services:
+  expense-tracker-application-user-api:
+    build:
+      context: ./UserAPI
+      dockerfile: dockerfile
+    ports:
+      - "8080:8080"
+    environment:
+      MONGO_URI: ${MONGO_URI}
+      DATABASE_NAME: ${DATABASE_NAME}
+      RABBITMQ_URI: ${RABBITMQ_URI}
+      JWT_SECRET: ${JWT_SECRET}
+      TOKEN_EXPIRATION: ${TOKEN_EXPIRATION}
+    depends_on:
+      - rabbitmq
+      - mongodb
+    container_name: user-api-container
+
+  expense-tracker-application-expense-api:
+    build:
+      context: ./ExpenseAPI
+      dockerfile: dockerfile
+    ports:
+      - "8081:8080"
+    environment:
+      MONGO_URI: ${MONGO_URI}
+      DATABASE_NAME: ${DATABASE_NAME}
+      RABBITMQ_URI: ${RABBITMQ_URI}
+      JWT_SECRET: ${JWT_SECRET}
+    depends_on:
+      - rabbitmq
+      - mongodb
+    container_name: expense-api-container
+
+  rabbitmq:
+    image: rabbitmq:3.9-management
+    ports:
+      - "5672:5672"
+      - "15672:15672"
+    container_name: rabbitmq-container
+
+  mongodb:
+    image: mongo
+    ports:
+      - "27017:27017"
+    container_name: mongodb-container
