@@ -18,7 +18,14 @@ The system consists of two components:
 
 ## Setup and Execution
 
-1. Set variables in a copy of ".env.example" file and rename the new file as ".env"
+1. Set variables in a copy of ".env.example" file and rename the new file as ".env":
+```sh
+MONGO_URI        = "<...>"
+DATABASE_NAME    = "<...>"
+RABBITMQ_URI     = "<...>"
+JWT_SECRET       = "<...>"
+TOKEN_EXPIRATION = "<...>h<...>m<...>s"
+```
 
 2. Run with "docker compose":
 ```sh
